@@ -10,7 +10,7 @@
         <title>GIPE 2022 - @yield('title')</title>
     </head>
     <body>
-      <div>
+      <div class="container">
         @yield('content')
       </div>
       <footer>
