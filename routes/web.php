@@ -13,23 +13,20 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('home.index', []);
-})->name('home.index');
-
-Route::get('/contact', function () {
-    return "contacttttt";
-})->name('home.contact');
+Route::view('/', 'home.index');
+Route::view('/contact', 'home.contact');
 
 Route::get('/blogposts/{id}', function($id) {
     $posts = [
         1 => [
             'title' => 'Intro to Laravel',
-            'content' => 'This is a short intro to Laravel'
+            'content' => 'This is a short intro to Laravel',
+            'is_new' => true
         ],
         2 => [
             'title' => 'Intro to PHP',
-            'content' => 'This is a short intro to PHP'
+            'content' => 'This is a short intro to PHP',
+            'is_new' => false
         ]
     ];
     abort_if (!isset($posts[$id]), 404);
