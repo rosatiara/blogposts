@@ -16,19 +16,24 @@ use Illuminate\Support\Facades\Route;
 Route::view('/', 'home.index');
 Route::view('/contact', 'home.contact');
 
-Route::get('/blogposts/{id}', function($id) {
-    $posts = [
-        1 => [
-            'title' => 'Intro to Laravel',
-            'content' => 'This is a short intro to Laravel',
-            'is_new' => true
-        ],
-        2 => [
-            'title' => 'Intro to PHP',
-            'content' => 'This is a short intro to PHP',
-            'is_new' => false
-        ]
-    ];
+$posts = [
+    1 => [
+        'title' => 'Intro to Laravel',
+        'content' => 'This is a short intro to Laravel',
+        'is_new' => true
+    ],
+    2 => [
+        'title' => 'Intro to PHP',
+        'content' => 'This is a short intro to PHP',
+        'is_new' => false
+    ]
+];
+
+Route::get('/blogposts', function() use ($posts){
+    return view('blogposts.index', ['posts' => $posts]);
+})->name('blogposts.index');
+
+Route::get('/blogposts/{id}', function($id) use($posts) {
     abort_if (!isset($posts[$id]), 404);
     return view ('blogposts.show', ['post' => $posts[$id]]);
 })->name('blogposts.show');
