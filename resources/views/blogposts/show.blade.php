@@ -2,11 +2,11 @@
 @section('title', 'Blog Posts Page')
 
 @section('content')
-  @if($post['is_new'])
+  @if($blogpost['is_new'])
     <div>This is a new blog post</div>
-    @elseif(!$post['is_new'])
+    @elseif(!$blogpost['is_new'])
     <div>This is an old blog post</div>
   @endif
-    <h1>{{ $post['title'] }}</h1>
-    <p>{{ $post['content'] }}</p>
+    <h1>{{ $blogpost['title'] }}</h1>
+    <p>{{ $blogpost['content'] }}</p>
 @endsection

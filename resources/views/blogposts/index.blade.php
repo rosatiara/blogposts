@@ -2,7 +2,7 @@
 @extends('layout.app')
 @section('title', 'Blog Posts page')
 @section('content')
-  @foreach($posts as $post)
+  @foreach($blogposts as $post)
       <p>{{ $post['title'] }}</p>
   @endforeach
 @endsection
