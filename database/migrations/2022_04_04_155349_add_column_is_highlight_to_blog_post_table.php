@@ -14,7 +14,7 @@ return new class extends Migration
     public function up()
     {
         Schema::table('blog_post', function (Blueprint $table) {
-            //
+            $table->boolean('blogPostIsHighlight')->default('0');
         });
     }
 
@@ -25,8 +25,8 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::table('blog_post', function (Blueprint $table) {
-            //
+        Schema::table('blog_post', function ($table) {
+            $table->dropColumn('blogPostIsHighlight');
         });
     }
 };
