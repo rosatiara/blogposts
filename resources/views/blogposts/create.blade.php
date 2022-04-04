@@ -13,7 +13,13 @@
       <input type="text" class="form-control" name="blogPostContent">
     </div>
     <div class="mt-4">
-      <button>Create</button>
+      <div>
+          <input type="checkbox" id="highlight" name="highlight" value="highlight">
+          <label for="highlight">Highlight Blog Post</label>
+      </div>
+      <div>
+          <button type="button" class="btn btn-primary mt-3">Create</button>
+      </div>
     </div>
   </form>
 @endsection
