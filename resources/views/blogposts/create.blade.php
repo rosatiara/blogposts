@@ -7,10 +7,12 @@
     <div class="mb-3">
       <label for="blogPostTitle" class="form-label">Blog Post Title</label>
       <input type="text" class="form-control" name="blogPostTitle">
+      <small>Please insert the title of the Blog Post</small>
     </div>
     <div>
     <label for="blogPostContent" class="form-label">Blog Post Content</label>
       <input type="text" class="form-control" name="blogPostContent">
+      <small>Please insert the content of the Blog Post</small>
     </div>
     <div class="mt-4">
       <div>
