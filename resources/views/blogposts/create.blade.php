@@ -1,7 +1,7 @@
 @extends('layout.app')
 @section('title', 'Create Blog Posts page')
 @section('content')
-  <h1>Create a new blog post</h1>
+  <h1 class="mt-4">Create a new blog post</h1>
   <form action="{{ route('blogposts.store') }}" method="POST">
   @csrf
     <div class="mb-3">
