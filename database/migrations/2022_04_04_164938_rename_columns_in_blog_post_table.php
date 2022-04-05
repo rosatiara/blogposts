@@ -14,7 +14,8 @@ return new class extends Migration
     public function up()
     {
         Schema::table('blog_post', function (Blueprint $table) {
-            $table->boolean('blogPostIsHighlight')->default('0');
+            $table->renameColumn('title', 'blogPostTitle');
+            $table->renameColumn('content', 'blogPostContent');
         });
     }
 
@@ -25,8 +26,9 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::table('blog_post', function ($table) {
-            $table->dropColumn('blogPostIsHighlight');
+        Schema::table('blog_post', function (Blueprint $table) {
+            $table->renameColumn('blogPostTitle', 'title');
+            $table->renameColumn('blogPostContent', 'content');
         });
     }
 };
