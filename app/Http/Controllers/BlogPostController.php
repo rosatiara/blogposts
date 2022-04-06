@@ -47,7 +47,16 @@ class BlogPostController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $blogpost = new BlogPost();
+        $blogpost->blogPostTitle = $request['blogPostTitle'];
+        $blogpost->blogPostContent = $request['blogPostContent'];
+        $blogpost->blogPostIsHighlight = $request['blogPostIsHighlight']== 'on' ? 1 : 0;
+
+        $blogpost->save();
+        $request->session()->flash('status', 'The Blog Post was created!');
+        
+        return redirect ()->route('blogposts.show', ['blogpost'=>$blogpost->id]);
+
     }
 
     /**
