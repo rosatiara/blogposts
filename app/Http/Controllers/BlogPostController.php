@@ -26,7 +26,7 @@ class BlogPostController extends Controller
      */
     public function index()
     {
-        return view('blogposts.index', ['blogposts'=>$this->blogposts]);
+        return view('blogposts.index', ['blogposts'=>BlogPost::orderBy('created_at', 'desc')->get()]);
     }
 
     /**
@@ -67,8 +67,8 @@ class BlogPostController extends Controller
      */
     public function show($id)
     {
-        abort_if(!isset($this->blogposts[$id]), 404);
-        return view('blogposts.show', ['blogpost' => $this->blogposts[$id]]);
+        // abort_if(!isset($this->blogposts[$id]), 404);
+        return view('blogposts.show', ['blogpost' => BlogPost::findOrFail($id)]);
     }
 
     /**
