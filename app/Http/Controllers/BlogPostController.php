@@ -26,7 +26,7 @@ class BlogPostController extends Controller
      */
     public function index()
     {
-        return view('blogposts.index', ['blogposts'=>$this->blogposts]);
+        return view('blogposts.index', ['blogposts'=>BlogPost::orderBy('created_at', 'desc')->get()]);
     }
 
     /**
@@ -47,7 +47,16 @@ class BlogPostController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $blogpost = new BlogPost();
+        $blogpost->blogPostTitle = $request['blogPostTitle'];
+        $blogpost->blogPostContent = $request['blogPostContent'];
+        $blogpost->blogPostIsHighlight = $request['blogPostIsHighlight']== 'on' ? 1 : 0;
+
+        $blogpost->save();
+        $request->session()->flash('status', 'The Blog Post was created!');
+        
+        return redirect ()->route('blogposts.show', ['blogpost'=>$blogpost->id]);
+
     }
 
     /**
@@ -58,8 +67,8 @@ class BlogPostController extends Controller
      */
     public function show($id)
     {
-        abort_if(!isset($this->blogposts[$id]), 404);
-        return view('blogposts.show', ['blogpost' => $this->blogposts[$id]]);
+        // abort_if(!isset($this->blogposts[$id]), 404);
+        return view('blogposts.show', ['blogpost' => BlogPost::findOrFail($id)]);
     }
 
     /**
