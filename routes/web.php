@@ -1,7 +1,8 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-
+use App\Http\Controllers\HomeController; // use HomeController as Controller
+use App\Http\Controllers\BlogPostController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -13,18 +14,11 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('home.index', []);
-})->name('home.index');
+Route::get('/', [HomeController::class, 'home'])->name('home.index');
+Route::get('/contact', [HomeController::class, 'contact'])->name('home.contact');
 
-Route::get('/contact', function () {
-    return "contacttttt";
-})->name('home.contact');
 
-Route::get('/blogposts/{id}', function($id) {
-    return 'blog post' . $id;
-})->name('blogposts.show');
-
+Route::resource('blogposts', BlogPostController::class);
 Route::get('recent-posts/{days_ago}', function ($daysAgo = 20) {
     return 'posts from' . $daysAgo . ' days ago';
 })->name('blogposts.recent.index');
