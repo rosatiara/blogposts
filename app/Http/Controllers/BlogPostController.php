@@ -47,6 +47,7 @@ class BlogPostController extends Controller
      */
     public function store(Request $request)
     {
+        $validated = $request->validated();
         $blogpost = new BlogPost();
         $blogpost->blogPostTitle = $request['blogPostTitle'];
         $blogpost->blogPostContent = $request['blogPostContent'];
