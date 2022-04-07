@@ -26,7 +26,7 @@ class BlogPostController extends Controller
      */
     public function index()
     {
-        return view('blogposts.index', ['blogposts'=>BlogPost::orderBy('created_at', 'desc')->take(5)->get()]);
+        return view('blogposts.index', ['blogposts'=>BlogPost::all()]);
     }
 
     /**
