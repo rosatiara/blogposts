@@ -6,13 +6,13 @@
   @csrf
     <div class="mb-3">
       <label for="blogPostTitle" class="form-label">Blog Post Title</label>
-      <input type="text" class="form-control" name="blogPostTitle">
+      <input type="text" class="form-control" name="blogPostTitle" id="blogPostTitle" value="{{old('blogPostTitle')}}" aria-describedby="blogPostTitleHelp">
       <small>Please insert the title of the Blog Post</small>
     </div>
-    <div>
+    <div class="mb-3">
     <label for="blogPostContent" class="form-label">Blog Post Content</label>
-      <input type="text" class="form-control" name="blogPostContent">
-      <small>Please insert the content of the Blog Post</small>
+      <textarea name="blogPostContent" id="blogPostContent" class="form-control" aria-describedby="blogPostContentHelp">{{old('blogPostContent')}}</textarea>
+      <small id="blogPostContent">Please insert the content of the Blog Post</small>
     </div>
     <div class="mt-4">
       <div>
