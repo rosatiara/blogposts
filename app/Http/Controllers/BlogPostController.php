@@ -92,7 +92,15 @@ class BlogPostController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $blogpost = BlogPost::findOrFail($id);
+        $validated = $request->validated();
+        $blogpost->fill($validated);
+        $blogpost->blogPostIsHighlight = $request['blogPostIsHighlight'] == 'on' ? 1 : 0;
+        $blogpost->save();
+
+        $request->session()->flash('status', 'Blog Post was updated!');
+        return redirect()->route('blogposts.show', ['blogpost'=>$blogpost->id]);
+
     }
 
     /**
