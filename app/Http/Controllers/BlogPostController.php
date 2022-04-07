@@ -80,7 +80,7 @@ class BlogPostController extends Controller
      */
     public function edit($id)
     {
-        //
+        return view('blogposts.edit', ['blogpost'=>BlogPost::findOrFail($id)]);
     }
 
     /**
