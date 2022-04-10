@@ -12,8 +12,8 @@
     </div>
     <div class="mt-4 form-check">
       <div>
-          <input type="checkbox" id="highlight" name="highlight" value="highlight">
-          <label for="highlight">Highlight Blog Post</label>
+          <input type="checkbox" id="blogPostIsHighlight" name="blogPostIsHighlight" class="form-check-input">
+          <label class="form-check-label" for="blogPostIsHighlight">Highlight Blog Post</label>
       </div>
       <div>
           <button type="button" class="btn btn-primary mt-3">Create</button>
