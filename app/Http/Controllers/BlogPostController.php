@@ -50,8 +50,8 @@ class BlogPostController extends Controller
     {
         $validated = $request->validated();
         $blogpost = new BlogPost();
-        $blogpost->blogPostTitle = $request['blogPostTitle'];
-        $blogpost->blogPostContent = $request['blogPostContent'];
+        $blogpost->blogPostTitle = $validated['blogPostTitle'];
+        $blogpost->blogPostContent = $validated['blogPostContent'];
         $blogpost->blogPostIsHighlight = $request['blogPostIsHighlight']== 'on' ? 1 : 0;
 
         $blogpost->save();
@@ -91,7 +91,7 @@ class BlogPostController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(StoreBlogPost $request, $id)
     {
         $blogpost = BlogPost::findOrFail($id);
         $validated = $request->validated();
@@ -112,6 +112,11 @@ class BlogPostController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $blogpost = BlogPost::findOrFail($id);
+        $blogpost->delete();
+
+        session()->flash('status','Blog Post with the ID' . $id .' was deleted!');
+
+        return redirect()->route('blogposts.index');
     }
 }
