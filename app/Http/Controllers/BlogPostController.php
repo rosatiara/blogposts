@@ -26,6 +26,7 @@ class BlogPostController extends Controller
      */
     public function index()
     {
+        // select the posts in reverse order (newest to oldest) and transfer them to the view
         return view('blogposts.index', ['blogposts'=>BlogPost::all()]);
     }
 
