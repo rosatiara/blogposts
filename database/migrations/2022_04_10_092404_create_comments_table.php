@@ -16,6 +16,8 @@ return new class extends Migration
         Schema::create('comments', function (Blueprint $table) {
             $table->id();
             $table->timestamps();
+            $table->text('commentContent');
+            $table->foreignID('blog_post_id')->index()->contrained();
         });
     }
 

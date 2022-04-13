@@ -12,4 +12,7 @@ class BlogPost extends Model
     protected $fillable = ['blogPostTitle',
                             'blogPostContent'
 ];
+    public function comments(){
+        return $this->hasMany(Comment::class);
+    }
 }

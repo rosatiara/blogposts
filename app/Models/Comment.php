@@ -8,4 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Comment extends Model
 {
     use HasFactory;
+    public function blogPost(){
+        return $this->belongsTo(BlogPost::class);
+    }
 }
