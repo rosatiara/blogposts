@@ -2,7 +2,7 @@
 
 ### List of things that have helped me improve and/or solve errors throughout working on this project
 
-### Useful Commands 🛠
+### 🛠 Useful Commands
 
 #### **Migrate specific table**
 
@@ -10,7 +10,7 @@
 php artisan migrate --path=/database/migrations/2020_04_10_130703_create_test_table.php
 ```
 
-### Solving Errors 🗝
+### 🌈 Solving Errors
 
 #### **Field X does not have a default value**
 
