@@ -19,3 +19,7 @@ php artisan migrate --path=/database/migrations/2020_04_10_130703_create_test_ta
 3. Delete `STRICT_TRANS_TABLES` and add `NO_ENGINE_SUBSTITUTION`.
 
 Source: https://stackoverflow.com/questions/15438840/mysql-error-1364-field-doesnt-have-a-default-values
+
+#### Modifying table columns on PHPMyAdmin
+
+https://www.youtube.com/watch?v=_RMgMI3ONrI&ab_channel=HostGator
