@@ -28,7 +28,7 @@ https://www.youtube.com/watch?v=_RMgMI3ONrI&ab_channel=HostGator
 
 1. Go to your project's directory
     ```bash
-    cd <your_project>
+    cd your_project_name_here
     ```
 2. Check if there's any unstaged or uncommited changes in your local branch
 
