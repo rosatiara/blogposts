@@ -14,6 +14,9 @@ class BlogPostSeeder extends Seeder
      */
     public function run()
     {
-        //
+        BlogPost::factory()
+        -> count(30)
+        -> hasComments(rand(0,7))
+        -> create();
     }
 }
