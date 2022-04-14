@@ -23,3 +23,36 @@ Source: https://stackoverflow.com/questions/15438840/mysql-error-1364-field-does
 #### Modifying table columns on PHPMyAdmin
 
 https://www.youtube.com/watch?v=_RMgMI3ONrI&ab_channel=HostGator
+
+#### Resolving git merge conflicts
+
+1. Go to your project's directory
+    ```bash
+    cd <your_project>
+    ```
+2. Check if there's any unstaged or uncommited changes in your local branch
+
+    ```bash
+    git status
+    ```
+
+    - If there are untracked/unstaged changes, execute `git add` and commit the changes with `git commit`
+    - If there aren't any, go to step 3.
+
+3. Pull latest changes from the remote branch to see conflicting files.
+
+```bash
+ git pull origin master
+```
+
+4. Add or stage your changes
+
+```bash
+git add .
+```
+
+5. Commit your changes
+
+```bash
+git commit -m "resolved merge conflicts"
+```
