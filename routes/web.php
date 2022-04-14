@@ -18,8 +18,7 @@ Route::get('/', [HomeController::class, 'home'])->name('home.index');
 Route::get('/contact', [HomeController::class, 'contact'])->name('home.contact');
 
 
-Route::resource('blogposts', BlogPostController::class)->except('edit', 'update', 'destroy');
+Route::resource('/blogposts', BlogPostController::class);
 Route::get('recent-posts/{days_ago}', function ($daysAgo = 20) {
     return 'posts from' . $daysAgo . ' days ago';
 })->name('blogposts.recent.index');
-

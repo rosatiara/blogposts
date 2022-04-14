@@ -26,7 +26,8 @@ class BlogPostController extends Controller
      */
     public function index()
     {
-        return view('blogposts.index', ['blogposts'=>BlogPost::orderBy('created_at', 'desc')->get()]);
+        // select the posts in reverse order (newest to oldest) and transfer them to the view
+        return view('blogposts.index', ['blogposts'=>BlogPost::all()]);
     }
 
     /**
@@ -47,9 +48,10 @@ class BlogPostController extends Controller
      */
     public function store(Request $request)
     {
+        $validated = $request->validated();
         $blogpost = new BlogPost();
-        $blogpost->blogPostTitle = $request['blogPostTitle'];
-        $blogpost->blogPostContent = $request['blogPostContent'];
+        $blogpost->blogPostTitle = $validated['blogPostTitle'];
+        $blogpost->blogPostContent = $validated['blogPostContent'];
         $blogpost->blogPostIsHighlight = $request['blogPostIsHighlight']== 'on' ? 1 : 0;
 
         $blogpost->save();
@@ -79,7 +81,7 @@ class BlogPostController extends Controller
      */
     public function edit($id)
     {
-        //
+        return view('blogposts.edit', ['blogpost'=>BlogPost::findOrFail($id)]);
     }
 
     /**
@@ -89,9 +91,17 @@ class BlogPostController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(StoreBlogPost $request, $id)
     {
-        //
+        $blogpost = BlogPost::findOrFail($id);
+        $validated = $request->validated();
+        $blogpost->fill($validated);
+        $blogpost->blogPostIsHighlight = $request['blogPostIsHighlight'] == 'on' ? 1 : 0;
+        $blogpost->save();
+
+        $request->session()->flash('status', 'Blog Post was updated!');
+        return redirect()->route('blogposts.show', ['blogpost'=>$blogpost->id]);
+
     }
 
     /**
@@ -102,6 +112,11 @@ class BlogPostController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $blogpost = BlogPost::findOrFail($id);
+        $blogpost->delete();
+
+        session()->flash('status','Blog Post with the ID' . $id .' was deleted!');
+
+        return redirect()->route('blogposts.index');
     }
 }
