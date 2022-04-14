@@ -39,20 +39,20 @@ https://www.youtube.com/watch?v=_RMgMI3ONrI&ab_channel=HostGator
     - If there are untracked/unstaged changes, execute `git add` and commit the changes with `git commit`
     - If there aren't any, go to step 3.
 
-3. Pull latest changes from the remote branch to see conflicting files.
+3. Pull latest changes from the remote branch to see conflicting files
 
-```bash
- git pull origin master
-```
+    ```bash
+    git pull origin master
+    ```
 
 4. Add or stage your changes
 
-```bash
-git add .
-```
+    ```bash
+    git add .
+    ```
 
 5. Commit your changes
 
-```bash
-git commit -m "resolved merge conflicts"
-```
+    ```bash
+    git commit -m "resolved merge conflicts"
+    ```
