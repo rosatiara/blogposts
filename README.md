@@ -4,7 +4,7 @@
 
 ### 🛠 Useful Commands
 
-#### **Migrate specific table**
+### **Migrate specific table**
 
 ```bash
 php artisan migrate --path=/database/migrations/2020_04_10_130703_create_test_table.php
@@ -12,7 +12,7 @@ php artisan migrate --path=/database/migrations/2020_04_10_130703_create_test_ta
 
 ### 🌈 Solving Errors
 
-#### **Field X does not have a default value**
+### **Field X does not have a default value**
 
 1. Go to my.ini file on your MYSQL folder
 2. Search for `sql-mode` or `sql_mode`
@@ -20,11 +20,11 @@ php artisan migrate --path=/database/migrations/2020_04_10_130703_create_test_ta
 
 Source: https://stackoverflow.com/questions/15438840/mysql-error-1364-field-doesnt-have-a-default-values
 
-#### Modifying table columns on PHPMyAdmin
+### Modifying table columns on PHPMyAdmin
 
 https://www.youtube.com/watch?v=_RMgMI3ONrI&ab_channel=HostGator
 
-#### Resolving git merge conflicts
+### Resolving git merge conflicts
 
 1. Go to your project's directory
     ```bash
