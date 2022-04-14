@@ -1,5 +1,6 @@
 # How-tos
 
+<<<<<<< HEAD
 ### List of things that have helped me improve and/or solve errors throughout working on this project
 
 ### 🛠 Useful Commands
@@ -23,3 +24,10 @@ Source: https://stackoverflow.com/questions/15438840/mysql-error-1364-field-does
 #### Modifying table columns on PHPMyAdmin
 
 https://www.youtube.com/watch?v=_RMgMI3ONrI&ab_channel=HostGator
+=======
+-   [x] fix `php artisan migrate` problem by:
+-   ran `php artisan config:clear` and `php artisan cache:clear`
+-   [modified config.inc.php file](https://stackoverflow.com/questions/2341043/login-page-in-phpmyadmin)
+-   set the username & password directly on phpmyadmin
+-   [ ] continue with week 3
+>>>>>>> 47f7b66baff1e3813fe1911dd4cb6416d77fa82f
