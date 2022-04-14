@@ -14,10 +14,11 @@ return new class extends Migration
     public function up()
     {
         Schema::create('comments', function (Blueprint $table) {
+            // make tables
             $table->id();
-            $table->timestamps();
-            $table->text('commentContent');
-            $table->foreignID('blog_post_id')->index()->contrained();
+            $table->timestamps(); // created_at, updated_at
+            $table->text('commentContent'); // table: commentContent, table type: text
+            $table->foreignID('blog_post_id')->index()->constrained();
         });
     }
 
