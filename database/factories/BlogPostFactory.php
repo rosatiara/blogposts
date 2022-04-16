@@ -17,7 +17,9 @@ class BlogPostFactory extends Factory
     public function definition()
     {
         return [
-            //
+            'blogPostTitle' => $this->faker->sentence($nbWords = 4, $variableNbWords = true),
+            'blogPostContent' => $this->faker->text($maxNbChars = 200),
+            'blogPostIsHighlight' => $this->faker->randomElement($array = array('0', '1'))
         ];
     }
 }

@@ -17,7 +17,7 @@ class CommentFactory extends Factory
     public function definition()
     {
         return [
-            //
+            'commentContent' => $this->faker->text($maxNbChars = 100),
         ];
     }
 }
