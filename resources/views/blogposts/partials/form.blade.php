@@ -1,26 +1,21 @@
-<h1 class="mt-4">Create a new blog post</h1>
-  <form>
+<label for="blogPostTitle" class="form-label">Blog post Title</label>
+<input type="text" name="blogPostTitle" id="title" placeholder="Title" class="form-control"
+    value="{{ old('blogPostTitle', optional($post ?? null)->blogPostTitle) }}"></input>
+<p class="text-muted">Please insert the title of the Blog Post</p>
+<label for="blogPostContent" class="form-label">Blog post Body</label>
+<input name="blogPostContent" id="body" class="form-control" placeholder="Body"
+    value="{{ old('blogPostContent', optional($post ?? null)->blogPostContent) }}""></input>
+            <p class="   text-muted">Please insert the body of the Blog Post</p>
+<div class="mb-3">
+    <input type="checkbox" name="blogPostHighlight" id="blogPostHighlight" {{old('blogPostHighlight',optional($post??null)->blogPostIsHighLight?"checked":"")}}></input>
+    <label for="blogPostHighlight">Highlight Blog Post</label>
+</div>
+@if ($errors->any())
     <div class="mb-3">
-          <label for="blogPostTitle" class="form-label">Blog Post Title</label>
-          <input type="text" class="form-control" name="blogPostTitle" id="blogPostTitle" value="{{old('blogPostTitle', optional($blogpost ?? null)->blogPostTitle)}}" aria-describedby="blogPostTitleHelp">
-          <small id="blogPostTitle" class="form-text">Please insert the title of the Blog Post</small>
+        <ul class="list-group">
+            @foreach ($errors->all() as $error)
+                <li class="list-group-item list-group-item-danger">{{ $error }}</li>
+            @endforeach
+        </ul>
     </div>
-    <div class="mb-3">
-        <label for="blogPostContent" class="form-label">Blog Post Content</label>
-          <textarea name="blogPostContent" id="blogPostContent" class="form-control" aria-describedby="blogPostContentHelp">{{old('blogPostContent', optional($blogpost ?? null)->blogPostContent)}}</textarea>
-          <small id="blogPostContent" class="form-text">Please insert the content of the Blog Post</small>
-    </div>
-    <div class="mt-4 form-check">
-          <div>
-              <input type="checkbox" id="blogPostIsHighlight" name="blogPostIsHighlight" class="form-check-input">
-              <label class="form-check-label" for="blogPostIsHighlight">Highlight Blog Post</label>
-          </div>
-          @if($errors->any())
-          <div class="mb-3">
-              <ul class="list-group">
-                    @foreach($errors->all() as $error)
-                        <li class="list-group-item list-group-item-danger">{{$error}}</li>
-                    @endforeach
-              </ul>
-          </div>
-        @endif
+@endif
