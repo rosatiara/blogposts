@@ -27,7 +27,12 @@ class BlogPostController extends Controller
     public function index()
     {
         // select the posts in reverse order (newest to oldest) and transfer them to the view
-        return view('blogposts.index', ['blogposts'=>BlogPost::all()]);
+        // return view('blogposts.index', ['blogposts'=>BlogPost::all()]);
+        $posts = BlogPost::withCount(['comments', 'comments as new_comments' => function (Builder $query) {
+            $query->where('created_at', '>', Carbon::now()->subMonths(6));
+        },])->get();
+        return view('blogposts.index', ['posts' => $posts]);
+
     }
 
     /**

@@ -35,9 +35,18 @@ class AuthorController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(StoreAuthor $request)
     {
-        //
+        $validated = $request->validated();
+        $author = new Author();
+        $profile = new Profile();
+        $author->name = $validated['authorName'];
+        $profile->email = $validated['authorEmail'];
+        $author->save();
+        $author->profile()->save($profile);
+        $request->session()->flash('status', 'Author Created!');
+        return redirect()->route('authors.show', ['authors' => $author->id]);
+
     }
 
     /**
@@ -48,7 +57,7 @@ class AuthorController extends Controller
      */
     public function show($id)
     {
-        //
+        return view('authors.show', ['author' => Author::findOrFail($id)]);
     }
 
     /**
@@ -59,7 +68,7 @@ class AuthorController extends Controller
      */
     public function edit($id)
     {
-        //
+        return view('authors.update', ['author' => Author::findOrFail($id)]);
     }
 
     /**
@@ -71,7 +80,14 @@ class AuthorController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $author = Author::findOrFail($id);
+        $profile = Profile::Where('author_id', $id)->first();
+        $validated = $request->validated();
+        $author->fill($validated);
+        $author->name = $validated['authorName'];
+        $profile->email = $validated['email'];
+        return redirect()->route('authors.show', ['author' => $author->id]);
+
     }
 
     /**
@@ -82,6 +98,11 @@ class AuthorController extends Controller
      */
     public function destroy($id)
     {
-        //
+        
+        $author = Author::findOrFail($id);
+        $author->delete();
+        session()->flash('status', 'The Author' . $author->name . 'was deleted!');
+        return redirect()->route('authors.index');
+
     }
 }
