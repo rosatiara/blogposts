@@ -1,9 +1,12 @@
 @extends('layout.app')
-@section('title', 'Create Blog Posts page')
+@section('title', 'Blog posts page')
 @section('content')
-<h1>Create a new Blog Post</h1>
-  <form action="{{ route('blogposts.store') }}" method="POST">
-  @csrf
-  @include ('blogposts.partials.form')
-    <button type="submit" class="btn btn-primary">Create</button>
-  </form>
+    <h1>Create a new Blog Post</h1>
+    <div class="mx-auto">
+        <form action={{ route('blogposts.store') }} method="POST">
+            @csrf
+            @include('posts.partials.form')
+            <button type="submit" class="btn btn-primary">Create</button>
+        </form>
+    </div>
+@endsection
