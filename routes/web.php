@@ -4,6 +4,9 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController; // use HomeController as Controller
 use App\Http\Controllers\BlogPostController;
 use App\Http\Controllers\InternalAreaController;
+use App\Http\Controllers\AuthorController;
+use App\Http\Controllers\CommentController;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
