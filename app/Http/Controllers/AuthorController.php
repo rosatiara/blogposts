@@ -2,7 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\StoreAuthor;
+use App\Models\Author;
+use App\Models\Profile;
 use Illuminate\Http\Request;
+
 
 class AuthorController extends Controller
 {
