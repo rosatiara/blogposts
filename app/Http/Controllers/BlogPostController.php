@@ -2,7 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\StoreBlogPost;
+use App\Models\BlogPost;
+use Carbon\Carbon;
+use Illuminate\Contracts\Database\Eloquent\Builder;
 use Illuminate\Http\Request;
+
 
 class BlogPostController extends Controller
 {
@@ -86,7 +91,7 @@ class BlogPostController extends Controller
      */
     public function edit($id)
     {
-        return view('blogposts.edit', ['blogpost'=>BlogPost::findOrFail($id)]);
+        return view('blogposts.update', ['blogpost'=>BlogPost::findOrFail($id)]);
     }
 
     /**

@@ -5,7 +5,7 @@
     <div class="mx-auto">
         <form action={{ route('blogposts.store') }} method="POST">
             @csrf
-            @include('posts.partials.form')
+            @include('blogposts.partials.form')
             <button type="submit" class="btn btn-primary">Create</button>
         </form>
     </div>
