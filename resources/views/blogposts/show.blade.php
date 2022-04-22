@@ -6,6 +6,6 @@
         @elseif(!$post['is_new'])
         <div>This is an old blog post</div>
     @endif --}}
-    <h1>{{$post['blogPostTitle']}}</h1>
-    <p>{{$post['blogPostContent']}}</p>
+    <h1>{{$blogpost['blogPostTitle']}}</h1>
+    <p>{{$blogpost['blogPostContent']}}</p>
 @endsection
