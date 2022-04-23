@@ -15,8 +15,8 @@
         </div>
         <p>{{$blogpost['blogPostContent']}}</p>
     @else
-    <h1>This blog does not have an image</h1>
-    <h1>{{$blogpost['blogPostTitle']}}</h1>
-    <p>{{$blogpost['blogPostContent']}}</p>
+        <h1>This blog does not have an image</h1>
+        <h1>{{$blogpost['blogPostTitle']}}</h1>
+        <p>{{$blogpost['blogPostContent']}}</p>
     @endif
 @endsection
