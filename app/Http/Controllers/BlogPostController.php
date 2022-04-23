@@ -11,18 +11,6 @@ use Illuminate\Http\Request;
 
 class BlogPostController extends Controller
 {
-    private $blogposts = [
-        1 => [
-            'title' => 'Intro to Laravel',
-            'content' => 'This is a short intro to Laravel',
-            'is_new' => true
-        ],
-        2 => [
-            'title' => 'Intro to PHP',
-            'content' => 'This is a short intro to PHP',
-            'is_new' => false
-        ]
-    ];
 
     /**
      * Display a listing of the resource.
@@ -56,21 +44,18 @@ class BlogPostController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(StoreBlogPost $request)
     {
         $validated = $request->validated();
-        $validated['user_id']=$request->user()->id;
+        $validated['id']=$request->user()->id;
         $validated['blogPostIsHighlight']=$request['blogPostIsHighlight'] == 'on' ? 1 : 0;
         $blogpost = BlogPost::create($validated);
-        // $blogpost = new BlogPost();
-        // $blogpost->blogPostTitle = $validated['blogPostTitle'];
-        // $blogpost->blogPostContent = $validated['blogPostContent'];
-        // $blogpost->blogPostIsHighlight = $request['blogPostIsHighlight']== 'on' ? 1 : 0;
+
         if ($request->hasFile('blogPostImage')){
             $path = $request->file('blogPostImage')->store('blogPostImage');
             $blogpost->image()->save(Image::create(['imagePath' => $path]));
         }
-        $blogpost->save();
+      
 
         $request->session()->flash('status', 'The Blog Post was created!');
         return redirect ()->route('blogposts.show', ['blogpost'=>$blogpost->id]);
