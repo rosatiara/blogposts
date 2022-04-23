@@ -59,14 +59,20 @@ class BlogPostController extends Controller
     public function store(Request $request)
     {
         $validated = $request->validated();
-        $blogpost = new BlogPost();
-        $blogpost->blogPostTitle = $validated['blogPostTitle'];
-        $blogpost->blogPostContent = $validated['blogPostContent'];
-        $blogpost->blogPostIsHighlight = $request['blogPostIsHighlight']== 'on' ? 1 : 0;
-
+        $validated['user_id']=$request->user()->id;
+        $validated['blogPostIsHighlight']=$request['blogPostIsHighlight'] == 'on' ? 1 : 0;
+        $blogpost = BlogPost::create($validated);
+        // $blogpost = new BlogPost();
+        // $blogpost->blogPostTitle = $validated['blogPostTitle'];
+        // $blogpost->blogPostContent = $validated['blogPostContent'];
+        // $blogpost->blogPostIsHighlight = $request['blogPostIsHighlight']== 'on' ? 1 : 0;
+        if ($request->hasFile('blogPostImage')){
+            $path = $request->file('blogPostImage')->store('blogPostImage');
+            $blogpost->image()->save(Image::create(['imagePath' => $path]));
+        }
         $blogpost->save();
+
         $request->session()->flash('status', 'The Blog Post was created!');
-        
         return redirect ()->route('blogposts.show', ['blogpost'=>$blogpost->id]);
 
     }
@@ -91,7 +97,7 @@ class BlogPostController extends Controller
      */
     public function edit($id)
     {
-        return view('blogposts.update', ['blogpost'=>BlogPost::findOrFail($id)]);
+        return view('blogposts.edit', ['blogpost'=>BlogPost::findOrFail($id)]);
     }
 
     /**
