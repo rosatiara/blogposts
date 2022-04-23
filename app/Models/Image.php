@@ -16,4 +16,8 @@ class Image extends Model
     public function blogPost(){
         return $this->belongsTo(BlogPost::Class);
     }
+
+    public function url(){
+        return Storage::url($this->imagePath);
+    }
 }
