@@ -3,7 +3,7 @@
 @section('content')
     <h1>Update an existing Blog</h1>
     <div class="mx-auto">
-        <form action={{ route('blogposts.update',['blogpost'=>$post->id]) }} method="POST">
+        <form action={{ route('blogposts.update',['blogpost'=>$post->id]) }} method="POST" enctype="multipart/form-data">
             @csrf
             @method('PUT')
             @include('blogposts.partials.form')
