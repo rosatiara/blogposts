@@ -47,7 +47,7 @@ class BlogPostController extends Controller
     public function store(StoreBlogPost $request)
     {
         $validated = $request->validated();
-        $validated['user_id']=$request->user()->id;
+        $validated['id']=$request->user()->id;
         $validated['blogPostIsHighlight']=$request['blogPostIsHighlight'] == 'on' ? 1 : 0;
         $blogpost = BlogPost::create($validated);
 
