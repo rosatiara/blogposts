@@ -25,7 +25,8 @@ class StoreBlogPost extends FormRequest
     {
         return [
             'blogPostTitle' => 'bail|required|min:5|max:100',
-            'blogPostContent' => 'required|min:10'
+            'blogPostContent' => 'required|min:10',
+            'blogPostImage' =>'image|mimes:jpg,jpeg,png,gif,svg|max:2048|dimensions:min_height=250,max_width:1000',
         ];
         /**
          * bail = Stop running validation rules for the field after the first validation failure
