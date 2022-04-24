@@ -7,6 +7,7 @@ use App\Models\BlogPost;
 use Carbon\Carbon;
 use Illuminate\Contracts\Database\Eloquent\Builder;
 use Illuminate\Http\Request;
+use App\Mail\BlogPostCreated;
 
 
 class BlogPostController extends Controller
