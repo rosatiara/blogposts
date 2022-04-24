@@ -13,7 +13,7 @@ class BlogPost extends Model
     protected $fillable = ['blogPostTitle',
                             'blogPostContent',
                             'blogPostIsHighlight',
-                            'user_id'
+                            'id'
 ];
     public function image(){
         return $this->hasOne(Image::class);
