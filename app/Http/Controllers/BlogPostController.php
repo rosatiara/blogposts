@@ -96,11 +96,22 @@ class BlogPostController extends Controller
     {
         $blogpost = BlogPost::findOrFail($id);
         $validated = $request->validated();
-        $blogpost->fill($validated);
-        $blogpost->blogPostIsHighlight = $request['blogPostIsHighlight'] == 'on' ? 1 : 0;
-        $blogpost->save();
-
-        $request->session()->flash('status', 'Blog Post was updated!');
+        
+        $validated ['blogPostIsHighlight'] = $request['blogPostIsHighlight'] == 'on' ? 1 : 0;
+        if ($request->hasFile('blogPostImage')){
+            $path = $request->file('blogPostImage')->store('blogPostImages');
+            if ($blogpost->image){
+                Storage::delete($blogpost->image->imagePath);
+                $blogpost->image->imagePath=$path;
+                $blogpost->image->save();
+            }
+            else {
+                $blogpost->image()->save(Image::create(['imagePath'=>$path]));
+            }
+        }
+        
+        $blogpost->update($validated);
+        $request->session()->flash('status', 'Blog post was updated!');
         return redirect()->route('blogposts.show', ['blogpost'=>$blogpost->id]);
 
     }
