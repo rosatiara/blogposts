@@ -58,6 +58,7 @@ class BlogPostController extends Controller
       
 
         $request->session()->flash('status', 'The Blog Post was created!');
+        Mail::to($request->user())->send(new BlogPostCreated($blogpost));
         return redirect ()->route('blogposts.show', ['blogpost'=>$blogpost->id]);
 
     }
