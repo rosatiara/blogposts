@@ -82,14 +82,14 @@ class AuthorController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(StoreAuthor $request, $id)
     {
         $author = Author::findOrFail($id);
-        $profile = Profile::Where('author_id', $id)->first();
+        $profile = Profile::Where('id', $id)->first();
         $validated = $request->validated();
         $author->fill($validated);
         $author->name = $validated['authorName'];
-        $profile->email = $validated['email'];
+        $profile->email = $validated['authorEmail'];
         return redirect()->route('authors.show', ['author' => $author->id]);
 
     }
