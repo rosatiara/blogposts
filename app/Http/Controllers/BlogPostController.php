@@ -50,7 +50,7 @@ class BlogPostController extends Controller
     public function store(StoreBlogPost $request)
     {
         $validated = $request->validated();
-        $validated['id']=$request->user()->id;
+        $validated['user_id']=$request->user()->id;
         $validated['blogPostIsHighlight']=$request['blogPostIsHighlight'] == 'on' ? 1 : 0;
         $blogpost = BlogPost::create($validated);
 
@@ -131,7 +131,7 @@ class BlogPostController extends Controller
     {
         $blogpost = BlogPost::findOrFail($id);
         $this->authorize('blogposts.delete', $blogpost);
-        
+
         $comments = $blogpost->comments;
         foreach($comments as $comment)
             $comment->delete();
