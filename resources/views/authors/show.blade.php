@@ -1,6 +1,7 @@
 @extends('layout.app')
-@section('title', 'Author page')
+@section('title', 'Authors page')
+
 @section('content')
-    <h1>{{ $author['name'] }}</h1>
-    <p>Email: {{ $author['profile']['email'] }}</p>
+    <h1>{{ $author['authorName'] }} - {{$author->profile->authorEmail}}</h1>
 @endsection
+
