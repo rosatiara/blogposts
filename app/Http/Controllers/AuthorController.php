@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\StoreAuthor;
 use App\Models\Author;
 use App\Models\Profile;
+
 use Illuminate\Http\Request;
 
 
@@ -18,6 +19,7 @@ class AuthorController extends Controller
     public function __construct(){
         $this->middleware('auth');
     }
+
     public function index()
     {
         return view('authors.index', ['authors' => Author::with('profile')->get()]);
@@ -42,14 +44,12 @@ class AuthorController extends Controller
     public function store(StoreAuthor $request)
     {
         $validated = $request->validated();
-        $author = new Author();
+        $author = Author::create($validated);
         $profile = new Profile();
-        $author->name = $validated['authorName'];
-        $profile->email = $validated['authorEmail'];
-        $author->save();
-        $author->profile()->save($profile);
-        $request->session()->flash('status', 'Author Created!');
-        return redirect()->route('authors.show', ['authors' => $author->id]);
+        $profile->author_id = $author->id;
+        $profile->fill($validated)->save();
+        $request->session()->flash('status', 'Author ' . $author->authorName . ' was created!');
+        return redirect()->route('authors.index');
 
     }
 
@@ -85,11 +85,13 @@ class AuthorController extends Controller
     public function update(StoreAuthor $request, $id)
     {
         $author = Author::findOrFail($id);
-        $profile = Profile::Where('id', $id)->first();
+        $profile = $author->profile;
         $validated = $request->validated();
-        $author->fill($validated);
-        $author->name = $validated['authorName'];
-        $profile->email = $validated['authorEmail'];
+        $author->update($validated);
+        $profile->update($validated);
+        
+        $request->session()->flash('status', 'Author ' . $author->name . ' was updated!');
+
         return redirect()->route('authors.show', ['author' => $author->id]);
 
     }
@@ -104,8 +106,12 @@ class AuthorController extends Controller
     {
         
         $author = Author::findOrFail($id);
+        $profile = $author->profile;
+        $profile->delete();
         $author->delete();
-        session()->flash('status', 'The Author' . $author->name . 'was deleted!');
+
+        session()->flash('status', 'The Author' . $id . 'was deleted!');
+        
         return redirect()->route('authors.index');
 
     }

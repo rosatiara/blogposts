@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Profile extends Model
 {
     use HasFactory;
+    protected $fillable = ['authorEmail,'];
     public function author(){
         return $this->belongsTo(Author::class);
     }

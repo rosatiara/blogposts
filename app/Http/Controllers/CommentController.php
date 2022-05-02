@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\StoreComment;
+use App\Mail\BlogPostCreated;
 use App\Models\BlogPost;
 use App\Models\Comment;
 use Illuminate\Http\Request;
@@ -27,8 +27,7 @@ class CommentController extends Controller
      */
     public function create()
     {
-        $blogs = BlogPost::all();
-        return view('comments.create', ['blogs'=>$blogs]);
+        return view('comments.create', ['blogposts'=>BlogPost::all()]);
     }
 
     /**
@@ -37,15 +36,13 @@ class CommentController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(StoreComment $request)
+    public function store(Request $request)
     {
-        $validated = $request->validated();
-        $comment = new Comment();
-        $comment->commentContent = $validated['commentContent'];
-        $blogPost = BlogPost::findOrFail($validated['blogId']);
-        $blogPost->comments()->save($comment);
-        return redirect()->route('blogposts.index');
+        $comment = Comment::create(['commentContent' => $request->commentContent, 'blog_post_id' => $request -> blogPost]);
 
+        $request->session()->flash('status', 'Comment was created!');
+
+        return redirect()->route('blogposts.index');
     }
 
     /**
