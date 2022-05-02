@@ -9,6 +9,7 @@
                     <th scope="col">#</th>
                     <th scope="col">Title</th>
                     <th scope="col">Content</th>
+                    
                     <th scope="col">Highlight</th>
                     <th scope="col">All Comments</th>
                     <th scope="col">New Comments</th>
