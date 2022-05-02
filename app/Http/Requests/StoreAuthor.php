@@ -25,7 +25,7 @@ class StoreAuthor extends FormRequest
     {
         return [
             'authorName'=>'bail|required|min:3|max:255',
-            'authorEmail'=>'required|email'
+            'authorEmail'=>'required|email:strict'
         ];
     }
 }
