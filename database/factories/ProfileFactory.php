@@ -17,7 +17,7 @@ class ProfileFactory extends Factory
     public function definition()
     {
         return [
-            'email' => $this->faker->email,
+            'authorEmail' => $this->faker->userName().'@letsgipe.com',
         ];
     }
 }
