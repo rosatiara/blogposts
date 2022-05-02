@@ -19,7 +19,8 @@ class BlogPostFactory extends Factory
         return [
             'blogPostTitle' => $this->faker->sentence($nbWords = 4, $variableNbWords = true),
             'blogPostContent' => $this->faker->text($maxNbChars = 200),
-            'blogPostIsHighlight' => $this->faker->randomElement($array = array('0', '1'))
+            'blogPostIsHighlight' => $this->faker->randomElement($array = array('0', '1')),
+            'id' => $this->faker->numberBetween(1,3)
         ];
     }
 }
