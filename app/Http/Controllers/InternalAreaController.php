@@ -10,7 +10,7 @@ class InternalAreaController extends Controller
         $this->middleware('auth');
     }
 
-    public function home(){
-        return view('home.index');
+    public function index(){
+        return view('home');
     }
 }
