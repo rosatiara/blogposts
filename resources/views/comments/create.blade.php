@@ -7,7 +7,7 @@
             @csrf
             <label for="blogId" class="form-label">Select a blog</label>
             <select name="blogId" id="blog" class="form-select">
-                @foreach($blogs as $blog)
+                @foreach($blogposts as $blog)
                     <option value="{{$blog->id}}">{{$blog->blogPostTitle}}</option>
                 @endforeach
             </select>
