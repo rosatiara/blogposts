@@ -3,11 +3,13 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreBlogPost;
-use App\Models\BlogPost;
-use Carbon\Carbon;
-use Illuminate\Contracts\Database\Eloquent\Builder;
-use Illuminate\Http\Request;
 use App\Mail\BlogPostCreated;
+use App\Models\BlogPost;
+use App\Models\Image;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Facades\Storage;
+
 
 
 class BlogPostController extends Controller
@@ -23,9 +25,9 @@ class BlogPostController extends Controller
         // select the posts in reverse order (newest to oldest) and transfer them to the view
         // return view('blogposts.index', ['blogposts'=>BlogPost::all()]);
         $posts = BlogPost::withCount(['comments', 'comments as new_comments' => function (Builder $query) {
-            $query->where('created_at', '>', Carbon::now()->subMonths(6));
+            $query->where('created_at', '>=', now()->sub(12, 'hour'));
         },])->get();
-        return view('blogposts.index', ['posts' => $posts]);
+        return view('blogposts.index', compact('blogposts'));
 
     }
 
@@ -53,7 +55,7 @@ class BlogPostController extends Controller
         $blogpost = BlogPost::create($validated);
 
         if ($request->hasFile('blogPostImage')){
-            $path = $request->file('blogPostImage')->store('blogPostImage');
+            $path = $request->file('blogPostImage')->store('blogPostImages');
             $blogpost->image()->save(Image::create(['imagePath' => $path]));
         }
       
@@ -84,6 +86,7 @@ class BlogPostController extends Controller
      */
     public function edit($id)
     {
+        $this->authorize('blogposts.update', $blogpost);
         return view('blogposts.edit', ['blogpost'=>BlogPost::findOrFail($id)]);
     }
 
@@ -128,6 +131,7 @@ class BlogPostController extends Controller
     {
         $blogpost = BlogPost::findOrFail($id);
         $this->authorize('blogposts.delete', $blogpost);
+        
         $comments = $blogpost->comments;
         foreach($comments as $comment)
             $comment->delete();
