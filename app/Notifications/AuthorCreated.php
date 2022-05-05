@@ -41,8 +41,8 @@ class AuthorCreated extends Notification
     public function toMail($notifiable)
     {
         return (new MailMessage)
-                    ->line('The introduction to the notification.')
-                    ->action('Notification Action', url('/'))
+                    ->greeting('Hello, '. $notifiable->name . '!')
+                    ->line('The new author ' . $this->author['authorName'] . ' has been created!')
                     ->line('Thank you for using our application!');
     }
 
