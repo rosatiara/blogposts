@@ -20,7 +20,7 @@ class BlogPostFactory extends Factory
             'blogPostTitle' => $this->faker->sentence($nbWords = 4, $variableNbWords = true),
             'blogPostContent' => $this->faker->text($maxNbChars = 200),
             'blogPostIsHighlight' => $this->faker->randomElement($array = array('0', '1')),
-            'user_id' => $this->faker->numberBetween(1,3)
+            'id' => $this->faker->numberBetween(1,3)
         ];
     }
 }
