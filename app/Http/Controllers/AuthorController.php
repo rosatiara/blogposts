@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\StoreAuthor;
 use App\Models\Author;
 use App\Models\Profile;
+use App\Notifications\AuthorCreated;
 
 use Illuminate\Http\Request;
 
@@ -48,6 +49,11 @@ class AuthorController extends Controller
         $profile = new Profile();
         $profile->author_id = $author->id;
         $profile->fill($validated)->save();
+
+        // notification should be sent if a new author has been stored
+        $user = auth()->user();
+        $user->notify(new AuthorCreated($author));
+
         $request->session()->flash('status', 'Author ' . $author->authorName . ' was created!');
         return redirect()->route('authors.index');
 

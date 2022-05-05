@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Carbon\Carbon;
 use App\Http\Requests\StoreBlogPost;
 use App\Mail\BlogPostCreated;
 use App\Models\BlogPost;
@@ -14,6 +15,10 @@ use Illuminate\Support\Facades\Storage;
 
 class BlogPostController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth')->only(['create']);;
+    }
 
     /**
      * Display a listing of the resource.
@@ -24,11 +29,12 @@ class BlogPostController extends Controller
     {
         // select the posts in reverse order (newest to oldest) and transfer them to the view
         // return view('blogposts.index', ['blogposts'=>BlogPost::all()]);
-        $posts = BlogPost::withCount(['comments', 'comments as new_comments' => function (Builder $query) {
-            $query->where('created_at', '>=', now()->sub(12, 'hour'));
-        },])->get();
+        $blogposts = BlogPost::withCount(['comments', 'user', 'comments as new_comments' => function($query)
+        {
+            $query->where('created_at', '>=', now()->sub(12, 'hour') );
+        }
+        ])->get();
         return view('blogposts.index', compact('blogposts'));
-
     }
 
     /**
@@ -50,7 +56,7 @@ class BlogPostController extends Controller
     public function store(StoreBlogPost $request)
     {
         $validated = $request->validated();
-        $validated['user_id']=$request->user()->id;
+        $validated['id']=$request->user()->id;
         $validated['blogPostIsHighlight']=$request['blogPostIsHighlight'] == 'on' ? 1 : 0;
         $blogpost = BlogPost::create($validated);
 

@@ -16,7 +16,7 @@ return new class extends Migration
         Schema::create('profiles', function (Blueprint $table) {
             $table->id();
             $table->timestamps();
-            $table->string('email');
+            $table->string('authorEmail');
             $table->foreignID('author_id')->unique()->constrained();
         });
     }
