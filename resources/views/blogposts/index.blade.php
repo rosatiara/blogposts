@@ -22,7 +22,7 @@
                 </tr>
             </thead>
             <tbody>
-                @foreach ($posts as $key => $post)
+                @foreach ($blogposts as $key => $post)
                     <tr>
                         <th scope="row">{{ $key + 1 }}</th>
                         <td>{{ $post['blogPostTitle'] }}</td>
