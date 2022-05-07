@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Author extends Model
 {
     use HasFactory;
-    protected $fillable = ['authorName','authorEmail'];  
+    protected $fillable = ['authorName',];  
 
     public function profile(){
         return $this->hasOne(Profile::class);

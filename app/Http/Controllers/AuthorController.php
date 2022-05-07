@@ -78,7 +78,7 @@ class AuthorController extends Controller
      */
     public function edit($id)
     {
-        return view('authors.update', ['author' => Author::findOrFail($id)]);
+        return view('authors.edit', ['author' => Author::findOrFail($id)]);
     }
 
     /**

@@ -13,11 +13,8 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('profiles', function (Blueprint $table) {
-            $table->id();
-            $table->timestamps();
-            $table->string('email');
-            $table->foreignID('author_id')->unique()->constrained();
+        Schema::table('authors', function (Blueprint $table) {
+            $table->renameColumn('name', 'authorName');
         });
     }
 
@@ -28,6 +25,8 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('profiles');
+        Schema::table('author', function (Blueprint $table) {
+            $table->renameColumn('authorName', 'name');
+        });
     }
 };
